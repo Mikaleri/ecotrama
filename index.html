@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrama — Tapetes Ecológicos de Tampinhas de Garrafa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --g1:#2C5F2D;--g2:#4A7C59;--g3:#97BC62;--g4:#C8DCA0;
+      --sand:#F0EAD6;--cream:#FAF7F0;--dark:#1A2E1A;--amber:#E8941A;
+      --white:#FFFFFF;
+    }
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+    /* NAV */
+    nav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(250,247,240,0.92);backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(44,95,45,0.12);
+      padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;
+    }
+    .logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--g1);display:flex;align-items:center;gap:8px}
+    .logo span{font-style:italic;font-weight:400;font-size:0.85rem;color:var(--g2);letter-spacing:0.05em}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;font-size:0.88rem;font-weight:500;color:var(--g2);letter-spacing:0.03em;transition:color .2s}
+    .nav-links a:hover{color:var(--g1)}
+    .nav-cta{background:var(--g1);color:var(--white);border:none;padding:0.5rem 1.25rem;border-radius:100px;font-size:0.85rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:background .2s}
+    .nav-cta:hover{background:var(--g2)}
+
+    /* HERO */
+    .hero{
+      min-height:92vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;
+      padding:4rem 3rem 4rem 4rem;gap:3rem;position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;right:-120px;top:-120px;
+      width:520px;height:520px;border-radius:50%;
+      background:radial-gradient(circle,rgba(151,188,98,0.18) 0%,transparent 70%);
+      pointer-events:none;
+    }
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      background:rgba(151,188,98,0.18);border:1px solid rgba(151,188,98,0.4);
+      border-radius:100px;padding:4px 14px;font-size:0.78rem;font-weight:500;
+      color:var(--g1);letter-spacing:0.04em;margin-bottom:1.5rem;
+    }
+    .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,3.6rem);line-height:1.12;color:var(--dark);margin-bottom:1.25rem;}
+    .hero h1 em{color:var(--g1);font-style:italic}
+    .hero p{font-size:1.05rem;line-height:1.75;color:var(--g2);max-width:440px;margin-bottom:2rem;font-weight:300}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-primary{background:var(--g1);color:var(--white);padding:0.8rem 1.8rem;border-radius:100px;font-size:0.92rem;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;text-decoration:none;display:inline-block;}
+    .btn-primary:hover{background:var(--g2);transform:translateY(-1px)}
+    .btn-outline{background:transparent;color:var(--g1);padding:0.8rem 1.8rem;border-radius:100px;font-size:0.92rem;font-weight:500;border:1.5px solid var(--g1);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;text-decoration:none;display:inline-block;}
+    .btn-outline:hover{background:var(--g1);color:var(--white)}
+
+    /* HERO VISUAL */
+    .hero-visual{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:12px}
+    .cap-card{border-radius:16px;overflow:hidden;position:relative;background:var(--g4)}
+    .cap-card.big{grid-row:span 2}
+    .cap-badge{position:absolute;bottom:12px;left:12px;background:rgba(26,46,26,0.82);backdrop-filter:blur(6px);color:var(--white);font-size:0.72rem;padding:4px 10px;border-radius:100px;font-weight:500;}
+
+    /* STATS */
+    .stats-bar{background:var(--g1);display:grid;grid-template-columns:repeat(4,1fr);padding:2rem 4rem;gap:1rem;}
+    .stat{text-align:center;color:var(--white)}
+    .stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--g3);line-height:1}
+    .stat-label{font-size:0.8rem;letter-spacing:0.06em;opacity:0.75;margin-top:4px;font-weight:300}
+
+    /* SECTION */
+    section{padding:5rem 4rem}
+    .section-tag{font-size:0.75rem;letter-spacing:0.12em;color:var(--g3);font-weight:500;text-transform:uppercase;margin-bottom:0.75rem}
+    .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--dark);margin-bottom:1rem;line-height:1.2}
+    .section-sub{font-size:0.98rem;color:var(--g2);line-height:1.75;font-weight:300;max-width:520px}
+
+    /* PRODUTOS */
+    #produtos{background:var(--sand)}
+    .produtos-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem}
+    .produtos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .produto-card{background:var(--white);border-radius:20px;overflow:hidden;box-shadow:0 2px 20px rgba(44,95,45,0.08);transition:transform .3s,box-shadow .3s;}
+    .produto-card:hover{transform:translateY(-6px);box-shadow:0 8px 32px rgba(44,95,45,0.14)}
+    .produto-img{height:220px;background:var(--g4);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .produto-tag{position:absolute;top:12px;right:12px;background:var(--amber);color:var(--white);font-size:0.7rem;font-weight:500;padding:3px 10px;border-radius:100px;}
+    .produto-body{padding:1.25rem}
+    .produto-nome{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:0.5rem}
+    .produto-desc{font-size:0.85rem;color:var(--g2);line-height:1.6;font-weight:300;margin-bottom:1rem}
+    .produto-footer{display:flex;justify-content:space-between;align-items:center}
+    .produto-preco{font-size:1.25rem;font-weight:500;color:var(--g1)}
+    .produto-btn{background:var(--g1);color:var(--white);border:none;padding:0.45rem 1rem;border-radius:100px;font-size:0.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s;}
+    .produto-btn:hover{background:var(--g2)}
+
+    /* DURABILIDADE */
+    #durabilidade{background:var(--cream)}
+    .dur-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
+    .dur-ring{width:280px;height:280px;border-radius:50%;border:3px solid var(--g3);display:flex;align-items:center;justify-content:center;flex-direction:column;margin:0 auto;position:relative;}
+    .dur-ring::before{content:'';position:absolute;inset:-16px;border-radius:50%;border:1px dashed rgba(151,188,98,0.35);}
+    .dur-years{font-family:'Playfair Display',serif;font-size:4rem;color:var(--g1);line-height:1}
+    .dur-anos-label{font-size:0.9rem;color:var(--g2);letter-spacing:0.08em;font-weight:300}
+    .dur-caption{font-size:0.78rem;color:var(--g3);margin-top:0.5rem;text-align:center}
+    .dur-items{display:flex;flex-direction:column;gap:1.25rem}
+    .dur-item{display:flex;gap:1rem;align-items:flex-start}
+    .dur-icon{width:44px;height:44px;min-width:44px;border-radius:12px;background:rgba(151,188,98,0.15);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+    .dur-item-title{font-weight:500;color:var(--dark);font-size:0.95rem;margin-bottom:2px}
+    .dur-item-desc{font-size:0.85rem;color:var(--g2);line-height:1.6;font-weight:300;margin-bottom:6px}
+    .dur-bar{height:5px;border-radius:100px;background:rgba(151,188,98,0.2);overflow:hidden}
+    .dur-bar-fill{height:100%;border-radius:100px;background:var(--g3);}
+
+    /* PROCESSO */
+    #processo{background:var(--g1)}
+    #processo .section-title{color:var(--white)}
+    #processo .section-tag{color:var(--g3)}
+    #processo .section-sub{color:rgba(255,255,255,0.65)}
+    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:3rem;position:relative}
+    .steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:rgba(151,188,98,0.3);z-index:0;}
+    .step{text-align:center;position:relative;z-index:1}
+    .step-num{width:56px;height:56px;border-radius:50%;background:var(--g3);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--g1);margin:0 auto 1rem;font-weight:700;}
+    .step-title{font-weight:500;font-size:0.88rem;color:var(--white);margin-bottom:6px}
+    .step-desc{font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.55;font-weight:300}
+
+    /* SOBRE */
+    #sobre{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:5rem 4rem}
+    .sobre-img{border-radius:24px;overflow:hidden;height:480px;display:flex;align-items:center;justify-content:center;}
+    .sobre-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(44,95,45,0.08);border:1px solid rgba(44,95,45,0.15);border-radius:100px;padding:4px 14px;font-size:0.75rem;color:var(--g1);font-weight:500;margin-bottom:1rem;}
+    .sobre-valores{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem}
+    .valor-tag{background:rgba(151,188,98,0.15);color:var(--g1);border-radius:100px;padding:5px 14px;font-size:0.8rem;font-weight:500;}
+
+    /* DEPOIMENTOS */
+    #depoimentos{background:var(--dark);padding:5rem 4rem}
+    #depoimentos .section-tag{color:var(--g3)}
+    #depoimentos .section-title{color:var(--white)}
+    .dep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+    .dep-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.5rem;}
+    .dep-stars{color:var(--amber);font-size:0.9rem;margin-bottom:0.75rem;letter-spacing:2px}
+    .dep-texto{font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.75;font-weight:300;margin-bottom:1rem;font-style:italic}
+    .dep-autor{font-size:0.82rem;font-weight:500;color:var(--g3)}
+    .dep-local{font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:2px}
+
+    /* CONTATO */
+    #contato{background:var(--g1);padding:5rem 4rem;text-align:center;position:relative;overflow:hidden;}
+    #contato::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(151,188,98,0.12) 0%,transparent 65%);pointer-events:none;}
+    .contato-form{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:0.75rem}
+    .contato-form input,.contato-form textarea{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:0.75rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.92rem;outline:none;width:100%;resize:none;transition:border-color .2s;}
+    .contato-form input::placeholder,.contato-form textarea::placeholder{color:rgba(255,255,255,0.35)}
+    .contato-form input:focus,.contato-form textarea:focus{border-color:var(--g3)}
+    .contato-info{display:flex;justify-content:center;gap:3rem;margin-top:3rem;flex-wrap:wrap}
+    .cinfo{text-align:center}
+    .cinfo-label{font-size:0.72rem;letter-spacing:0.1em;color:rgba(255,255,255,0.4);margin-bottom:4px}
+    .cinfo-val{font-size:0.9rem;color:var(--g3);font-weight:500}
+
+    /* FOOTER */
+    footer{background:var(--dark);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(255,255,255,0.06);}
+    .footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--g3)}
+    .footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.3)}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{font-size:0.78rem;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s}
+    .footer-links a:hover{color:var(--g3)}
+
+    /* ANIM */
+    .fade-up{animation:fadeUp .7s ease forwards}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .delay-1{animation-delay:.1s}.delay-2{animation-delay:.25s}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .hero{grid-template-columns:1fr;min-height:auto;padding:2rem}
+      .hero-visual{display:none}
+      .stats-bar{grid-template-columns:repeat(2,1fr);padding:2rem}
+      section{padding:3rem 1.5rem}
+      .produtos-grid{grid-template-columns:1fr}
+      .dur-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr;gap:2rem}
+      .steps::before{display:none}
+      #sobre{grid-template-columns:1fr}
+      .dep-grid{grid-template-columns:1fr}
+      .contato-info{gap:1.5rem}
+      footer{flex-direction:column;text-align:center;padding:2rem}
+      nav{padding:0 1rem}
+      .nav-links{display:none}
+      .produtos-header{flex-direction:column;gap:1rem;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">🌿 EcoTrama <span>www.ecotrama.com.br</span></div>
+  <ul class="nav-links">
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#durabilidade">Durabilidade</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Pedir agora</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="fade-up">
+    <div class="hero-badge">♻️ 100% Sustentável · Feito no Brasil</div>
+    <h1>Arte que <em>transforma</em> tampinhas em lar</h1>
+    <p>Tapetes ecológicos feitos à mão com tampinhas de garrafa PET — duráveis, coloridos e com propósito. Para pano de prato, decoração e muito mais.</p>
+    <div class="hero-actions">
+      <a href="#produtos" class="btn-primary">Ver coleção</a>
+      <a href="#durabilidade" class="btn-outline">Como são feitos</a>
+    </div>
+  </div>
+  <div class="hero-visual fade-up delay-2">
+    <div class="cap-card big" style="height:340px;background:linear-gradient(135deg,#4A7C59,#97BC62,#C8DCA0);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+      <div style="font-size:3.5rem">🌿</div>
+      <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.2rem;text-align:center;line-height:1.4">Tapetes de<br><em>Tampinhas PET</em></div>
+      <div class="cap-badge">Mais vendido</div>
+    </div>
+    <div class="cap-card" style="height:160px;background:linear-gradient(135deg,#E8941A,#F5C842);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+      <div style="font-size:2rem">🎨</div>
+      <div style="font-size:0.8rem;font-weight:500;color:#4A1B0C">+40 cores disponíveis</div>
+    </div>
+    <div class="cap-card" style="height:160px;background:linear-gradient(135deg,#2C5F2D,#1A2E1A);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+      <div style="font-size:2rem">♻️</div>
+      <div style="font-size:0.8rem;font-weight:500;color:#97BC62">+200 tampinhas</div>
+      <div style="font-size:0.7rem;color:rgba(151,188,98,0.6)">por tapete</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">+5 anos</div><div class="stat-label">DE DURABILIDADE</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-label">TAMPINHAS POR PEÇA</div></div>
+  <div class="stat"><div class="stat-num">40+</div><div class="stat-label">CORES DISPONÍVEIS</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">FEITO À MÃO</div></div>
+</div>
+
+<!-- PRODUTOS -->
+<section id="produtos">
+  <div class="produtos-header">
+    <div>
+      <div class="section-tag">Nossa Coleção</div>
+      <div class="section-title">Cada peça conta uma história</div>
+    </div>
+    <a href="#contato" class="btn-outline">Encomendar peça única</a>
+  </div>
+  <div class="produtos-grid">
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#4A7C59,#97BC62)">
+        <div style="font-size:4rem">🌿</div>
+        <div class="produto-tag">Pano de Prato</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Tapete Folhagem Verde</div>
+        <div class="produto-desc">Padrão floral com tampinhas verdes e bege. Ideal como pano de prato decorativo ou centro de mesa. Durabilidade de 5 a 8 anos.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 65,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#E8941A,#F5C842)">
+        <div style="font-size:4rem">☀️</div>
+        <div class="produto-tag" style="background:#2C5F2D">Decoração</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Tapete Sol de Verão</div>
+        <div class="produto-desc">Tons quentes de laranja e amarelo com padrão geométrico. Perfeito para ambientes modernos e espaços criativos.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 89,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#1A4A7C,#4A90D9)">
+        <div style="font-size:4rem">🌊</div>
+        <div class="produto-tag" style="background:#7A2C2C">Premium</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Tapete Mar Profundo</div>
+        <div class="produto-desc">Degradê em tons de azul oceânico. Resistente à umidade — ideal para banheiro, cozinha ou área de lazer externa.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 120,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#7A2C7A,#D490D4)">
+        <div style="font-size:4rem">🌸</div>
+        <div class="produto-tag">Personalizado</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Tapete Jardim de Flores</div>
+        <div class="produto-desc">Padrão floral em roxo, rosa e verde. Pode ser personalizado com as cores da sua escolha. Tamanho sob medida.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 95,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#3D2B1F,#A0724A)">
+        <div style="font-size:4rem">🍂</div>
+        <div class="produto-tag" style="background:#2C5F2D">Clássico</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Tapete Terra & Palha</div>
+        <div class="produto-desc">Cores neutras terrosas para decoração rústica e minimalista. Combina perfeitamente com ambientes naturais.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 75,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <div class="produto-img" style="background:linear-gradient(135deg,#2C5F2D,#C8DCA0,#E8941A)">
+        <div style="font-size:4rem">🇧🇷</div>
+        <div class="produto-tag" style="background:#1A2E1A">Especial</div>
+      </div>
+      <div class="produto-body">
+        <div class="produto-nome">Coleção Cores do Brasil</div>
+        <div class="produto-desc">Edição especial com as cores nacionais. Ideal para presentes corporativos e eventos temáticos. Logotipo incluso.</div>
+        <div class="produto-footer"><span class="produto-preco">R$ 140,00</span><button class="produto-btn">Pedir</button></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DURABILIDADE -->
+<section id="durabilidade">
+  <div class="section-tag">Por que durar tanto?</div>
+  <div class="section-title">Feito para durar <em style="color:var(--g1);font-family:'Playfair Display',serif">gerações</em></div>
+  <div class="section-sub">A tampinha de PET é um dos materiais mais resistentes ao desgaste, à água e ao tempo. Quando costurada corretamente, se torna uma obra que atravessa anos.</div>
+  <div class="dur-grid">
+    <div>
+      <div class="dur-ring">
+        <div class="dur-years">5–8</div>
+        <div class="dur-anos-label">anos de vida útil</div>
+      </div>
+      <div class="dur-caption" style="margin-top:1rem">Com cuidado básico: lavar com pano úmido e guardar ao abrigo do sol direto</div>
+    </div>
+    <div class="dur-items">
+      <div class="dur-item">
+        <div class="dur-icon">💧</div>
+        <div>
+          <div class="dur-item-title">Resistência à água e umidade</div>
+          <div class="dur-item-desc">O PET não absorve umidade nem oxida. Pode ser lavado com água e sabão sem perder a forma.</div>
+          <div class="dur-bar"><div class="dur-bar-fill" style="width:95%"></div></div>
+        </div>
+      </div>
+      <div class="dur-item">
+        <div class="dur-icon">🔥</div>
+        <div>
+          <div class="dur-item-title">Resistência ao desgaste físico</div>
+          <div class="dur-item-desc">Tampinhas não se deformam com pisadas. A costura em linha encerada garante durabilidade máxima.</div>
+          <div class="dur-bar"><div class="dur-bar-fill" style="width:90%"></div></div>
+        </div>
+      </div>
+      <div class="dur-item">
+        <div class="dur-icon">🎨</div>
+        <div>
+          <div class="dur-item-title">Manutenção das cores</div>
+          <div class="dur-item-desc">Usamos a cor original da tampa — sem tintas. As cores são estáveis e não desbotam com o uso.</div>
+          <div class="dur-bar"><div class="dur-bar-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+      <div class="dur-item">
+        <div class="dur-icon">🌿</div>
+        <div>
+          <div class="dur-item-title">Material inerte e não tóxico</div>
+          <div class="dur-item-desc">O PET é inerte, não libera substâncias nocivas e não atrai mofo. Seguro para crianças e pets.</div>
+          <div class="dur-bar"><div class="dur-bar-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="section-tag">Do resíduo ao lar</div>
+  <div class="section-title">Como fazemos</div>
+  <div class="section-sub">Do descarte à obra final, cada tapete passa por um processo artesanal cuidadoso, feito por cooperadas em São Paulo.</div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-title">Coleta</div><div class="step-desc">Tampinhas coletadas em pontos de reciclagem parceiros e comunidades locais</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Triagem & Higienização</div><div class="step-desc">Separação por cor e tamanho. Lavagem com água e sabão neutro</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Design</div><div class="step-desc">A artesã planeja o padrão de cores conforme o modelo escolhido pelo cliente</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Costura à mão</div><div class="step-desc">Cada tampinha é fixada com linha encerada de alta resistência sobre base de EVA</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-title">Entrega</div><div class="step-desc">Embalado em saco kraft reciclável com cartão da artesã responsável</div></div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<div id="sobre">
+  <div class="sobre-img" style="background:linear-gradient(160deg,#2C5F2D,#4A7C59,#97BC62);flex-direction:column;gap:1.5rem;padding:2rem">
+    <div style="font-size:5rem">🌿</div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;text-align:center;line-height:1.3">Feito com amor<br><em>por artesãs paulistanas</em></div>
+    <div style="background:rgba(255,255,255,0.12);border-radius:12px;padding:1rem 1.5rem;text-align:center">
+      <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);letter-spacing:0.08em;margin-bottom:4px">COOPERATIVA EM</div>
+      <div style="font-size:1rem;font-weight:500;color:#C8DCA0">São Paulo, SP — Brasil</div>
+    </div>
+  </div>
+  <div>
+    <div class="sobre-chip">🌿 Nossa história</div>
+    <div class="section-title">Nascemos da vontade de mudar o mundo com as mãos</div>
+    <p style="font-size:0.98rem;color:var(--g2);line-height:1.8;font-weight:300;margin-top:1rem">A EcoTrama nasceu em 2024 com um propósito simples: transformar tampinhas plásticas que iriam para o lixo em objetos funcionais e belos, enquanto geramos renda digna para mulheres artesãs em situação de vulnerabilidade social na Grande São Paulo.</p>
+    <p style="font-size:0.98rem;color:var(--g2);line-height:1.8;font-weight:300;margin-top:0.75rem">Cada peça carrega a assinatura da artesã que a fez. Quando você compra um tapete EcoTrama, você apoia diretamente o sustento de uma família e evita que centenas de tampinhas contaminem rios e oceanos.</p>
+    <div class="sobre-valores">
+      <span class="valor-tag">♻️ Sustentabilidade</span>
+      <span class="valor-tag">🤝 Solidariedade</span>
+      <span class="valor-tag">🎨 Criatividade</span>
+      <span class="valor-tag">💪 Qualidade</span>
+      <span class="valor-tag">🌱 Propósito</span>
+    </div>
+  </div>
+</div>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="section-tag">O que dizem nossos clientes</div>
+  <div class="section-title">Histórias reais</div>
+  <div class="dep-grid">
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <div class="dep-texto">"Comprei para usar como pano de prato e acabou virando o centro de mesa das visitas. Todo mundo pergunta onde comprei! A qualidade é impressionante."</div>
+      <div class="dep-autor">Mariana Costa</div>
+      <div class="dep-local">São Paulo, SP</div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <div class="dep-texto">"Encomendei tapetes personalizados com as cores da empresa para presentear clientes. Ficou incrível e a equipe adorou a história por trás do produto."</div>
+      <div class="dep-autor">Ricardo Almeida</div>
+      <div class="dep-local">Campinas, SP — Diretor de Marketing</div>
+    </div>
+    <div class="dep-card">
+      <div class="dep-stars">★★★★★</div>
+      <div class="dep-texto">"Tenho um tapete EcoTrama no banheiro há 2 anos. Lavei várias vezes, molhou, secou — e está como novo. Sustentável de verdade, não é só marketing."</div>
+      <div class="dep-autor">Fernanda Lima</div>
+      <div class="dep-local">Ribeirão Preto, SP</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="section-tag" style="text-align:center">Fale conosco</div>
+  <div class="section-title" style="text-align:center;max-width:500px;margin:0 auto 0.75rem;color:#fff">Pronto para encomendar o seu?</div>
+  <div class="section-sub" style="text-align:center;max-width:460px;margin:0 auto 2rem;color:rgba(255,255,255,0.65)">Escolha um modelo da coleção ou descreva sua ideia. Fazemos peças únicas para presentes, eventos e decoração.</div>
+  <div class="contato-form">
+    <input type="text" placeholder="Seu nome">
+    <input type="email" placeholder="E-mail ou WhatsApp">
+    <textarea rows="3" placeholder="Descreva o tapete que você deseja (tamanho, cores, finalidade...)"></textarea>
+    <button class="btn-primary" style="border-radius:10px;font-size:0.95rem;border:none;cursor:pointer">Enviar mensagem</button>
+  </div>
+  <div class="contato-info">
+    <div class="cinfo"><div class="cinfo-label">WHATSAPP</div><div class="cinfo-val">(11) 98765-4321</div></div>
+    <div class="cinfo"><div class="cinfo-label">E-MAIL</div><div class="cinfo-val">contato@ecotrama.com.br</div></div>
+    <div class="cinfo"><div class="cinfo-label">ENDEREÇO</div><div class="cinfo-val">São Paulo, SP — Brasil</div></div>
+    <div class="cinfo"><div class="cinfo-label">HORÁRIO</div><div class="cinfo-val">Seg–Sex, 9h–18h</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌿 EcoTrama</div>
+  <div class="footer-copy">© 2024 EcoTrama · Todos os direitos reservados · CNPJ 45.123.678/0001-90</div>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">WhatsApp</a>
+    <a href="#">Elo7</a>
+    <a href="#">Mercado Livre</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
